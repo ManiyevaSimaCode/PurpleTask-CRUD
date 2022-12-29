@@ -32,7 +32,7 @@ namespace PurpleTask.Areas.Admin.Controllers
 
 
         [HttpPost]
-        [va]
+        
         public async Task<IActionResult> Create(Category category)
         {
             if (!ModelState.IsValid)

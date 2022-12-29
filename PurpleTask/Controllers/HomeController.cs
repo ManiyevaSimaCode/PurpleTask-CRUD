@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PurpleTask.DAL.Context;
 using PurpleTask.Models;
+using PurpleTask.ViewModels;
 using System.Diagnostics;
 
 namespace PurpleTask.Controllers
@@ -15,8 +16,14 @@ namespace PurpleTask.Controllers
         }
         public async Task< IActionResult> Index()
         {
-            List<Slider> sliders = await _dbContext.Sliders.ToListAsync();
-            return View(sliders);
+            CardCategoryViewModel model = new CardCategoryViewModel();
+
+          model.Sliders= await _dbContext.Sliders.ToListAsync();
+            model.Categories= await _dbContext.Categories
+                .Include(c=>c.Cards).
+                ToListAsync();
+
+            return View(model);
         }
 
        
